@@ -33,7 +33,7 @@
 		 	if ( mysqli_query($link, $query) ) {
 		 	 	$result_sucsess = "Фильм был успешно добавлен";
 		 	 } else {
-		 	 	$result_error = "Фильм НЕ был добавлен, произошла ошибка";
+		 	 	$result_error = "Фильм НЕ был добавлен, произошла ошибка.";
 		 	 }
 		 }
 
