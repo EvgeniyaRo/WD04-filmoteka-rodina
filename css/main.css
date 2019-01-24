@@ -453,6 +453,8 @@ a.badge:active {
   width: 100%;
   height: 315px;
 }
+
+
 .card__desc {
   display: -webkit-box;
   display: -ms-flexbox;
