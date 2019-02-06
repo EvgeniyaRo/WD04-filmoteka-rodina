@@ -1,4 +1,3 @@
-
 <?php
 
 //соединение с БД
@@ -15,19 +14,16 @@ if (@$_GET['action'] == 'delete') {
 	if ( $result ) {
 		$result_info = "Фильм " . $_GET['title'] . " был удален";
 	} else {
-		$result_error = "Что-то пошло не так" . $_GET['title'];
+		$result_error = "Что-то пошло не так";
 	}
 }
 
 //вывод фильмов
-$films = films_all($link);
+$film = get_film($link, $_GET['id']);
 
 include ('views/head.tpl');
 include ('views/notifications.tpl');
-include ('views/index.tpl');
+include ('views/film_card.tpl');
 include ('views/footer.tpl');
 
 ?>
-
-
-	
