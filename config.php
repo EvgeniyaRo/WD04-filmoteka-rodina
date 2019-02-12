@@ -8,6 +8,6 @@ define('MYSQL_DB', 'wd04-filmoteka-rodina');
 define('HOST', 'http://' . $_SERVER['HTTP_HOST'] . '/');
 define('ROOT', dirname(__FILE__) . '/');
 
-//print_r(phpinfo());
+print_r(phpinfo());
 
 ?>
