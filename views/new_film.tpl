@@ -10,7 +10,7 @@ if ( !empty($errors) ) {
 
 <div class="panel-holder mt-80 mb-40">
 	<div class="title-3 mt-0">Добавить фильм</div>
-	<form action="new.php" method="POST">
+	<form enctype="multipart/form-data" action="new.php" method="POST">
 		<div class="form-group"><label class="label">Название фильма<input class="input" name="title" type="text" placeholder="Такси 2" /></label></div>
 		<div class="row">
 			<div class="col">

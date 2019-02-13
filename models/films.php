@@ -16,38 +16,9 @@ function films_all($link){
 	}
 	return $films;
 }
-//Добавление фильма в БД из формы
-function add_film($link, $title, $type, $year, $description){
-	$query = "INSERT INTO `films` (`title`, `type`, `year`, `description`)
-		 VALUES ('".mysqli_real_escape_string($link, $_POST['title'])."',
-		 '".mysqli_real_escape_string($link, $_POST['genre'])."',
-		 '".mysqli_real_escape_string($link, $_POST['year'])."',
-		 '".mysqli_real_escape_string($link, $_POST['description'])."')";
-	if ( mysqli_query($link, $query) ) {
-		 	$result = true;
-		} else {
-		 	$result = false;
-	}
-	return $result;
-}
 
-//Запрос одного фильма для редактирования
-function get_film($link, $id){
-	$query = "SELECT * FROM films WHERE id = '". mysqli_real_escape_string($link, $id) ."' LIMIT 1";
-	$result = mysqli_query($link, $query);
-	if ( $result == mysqli_query($link, $query) ) {
-		$film = mysqli_fetch_array($result);
-	}
-	
-	return $film;
-}
-
-//Сохранение после редактирования
-function update_film($link, $title, $type, $year, $id, $description){
-	echo "<pre>";
-	print_r($_FILES);
-	echo "</pre>";
 //обработка картинки
+function add_img(){
 	if (isset($_FILES['photo']['name']) && $_FILES['photo']['tmp_name'] != "" ) {
 		$fileName = $_FILES['photo']['name'];
 		$fileTmpLog = $_FILES['photo']['tmp_name'];
@@ -72,7 +43,7 @@ function update_film($link, $title, $type, $year, $id, $description){
 			$errors[] = 'Произошла ошибка';
 		}
 
-		$photoFolderLocation = ROOT . 'data/films/full';
+		$photoFolderLocation = ROOT . 'data/films/full/';
 		$photoFolderLocationMin = ROOT . 'data/films/min/';
 		//$photoFolderLocationFull = ROOT . 'data/films/full/';
 		$uploadeFile = $photoFolderLocation . $db_file_name;
@@ -90,15 +61,49 @@ function update_film($link, $title, $type, $year, $id, $description){
 		$image = createThumbnail($targetFile, $wmax, $hmax);
 		$image->writeImage($resizedFile);
 
+		return $db_file_name;
 
 	}
+}
+//Добавление фильма в БД из формы
+function add_film($link, $title, $type, $year, $description, $addImg){
+	$query = "INSERT INTO films (title, type, year, description, photo)
+		 VALUES ('".mysqli_real_escape_string($link, $_POST['title'])."',
+		 '".mysqli_real_escape_string($link, $_POST['genre'])."',
+		 '".mysqli_real_escape_string($link, $_POST['year'])."',
+		 '".mysqli_real_escape_string($link, $_POST['description'])."',
+		 '".mysqli_real_escape_string($link, $addImg)."')";
+	if ( mysqli_query($link, $query) ) {
+		 	$result = true;
+		} else {
+		 	$result = false;
+	}
+	return $result;
+}
+
+//Запрос одного фильма для редактирования
+function get_film($link, $id){
+	$query = "SELECT * FROM films WHERE id = '". mysqli_real_escape_string($link, $id) ."' LIMIT 1";
+	$result = mysqli_query($link, $query);
+	if ( $result == mysqli_query($link, $query) ) {
+		$film = mysqli_fetch_array($result);
+	}
+	
+	return $film;
+}
+
+//Сохранение после редактирования
+function update_film($link, $title, $type, $year, $id, $description, $addImg){
+	echo "<pre>";
+	print_r($_FILES);
+	echo "</pre>";
 
 	$query = "UPDATE films
 			SET title = '".mysqli_real_escape_string($link, $title)."',
 				type = '".mysqli_real_escape_string($link, $type)."',
 				year = '".mysqli_real_escape_string($link, $year)."',
 				description = '".mysqli_real_escape_string($link, $description)."',
-				photo = '".mysqli_real_escape_string($link, $db_file_name)."'
+				photo = '".mysqli_real_escape_string($link, $addImg)."'
 				WHERE id = '".mysqli_real_escape_string($link, $id)."'
 				LIMIT 1";
 	if ( mysqli_query($link, $query) ) {

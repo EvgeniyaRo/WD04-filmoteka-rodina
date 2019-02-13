@@ -2,7 +2,7 @@
 	<div class="card mb-20">
 		<div class="row">
 			<div class="col-4">
-				<img src="<?=HOST?>data/films/wparis.jpg" alt="<?=@$film['title'] ?>">
+				<img src="<?=HOST?>data/films/full/<?=@$film['photo'] ?>" alt="<?=@$film['title'] ?>">
 			</div>
 			<div class="col">
 				<div class="card__header">

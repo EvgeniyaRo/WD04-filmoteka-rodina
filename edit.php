@@ -10,6 +10,7 @@ require ('models/films.php');
 if ( array_key_exists('updateFilm', $_POST) ) {
 	//Обработка ошибок
 	$errors = array();
+	$addImg = add_img();
 	if ( $_POST['title'] == "" ) {
 		$errors[] = "Введите название";
 	}
@@ -21,7 +22,7 @@ if ( array_key_exists('updateFilm', $_POST) ) {
 	}
 	//если ошибок нет сохраняем фильм в базу данных
 	if ($errors == []){
-		$result = update_film($link, $_POST['title'], $_POST['genre'], $_POST['year'], $_GET['id'], $_POST['description']);
+		$result = update_film($link, $_POST['title'], $_POST['genre'], $_POST['year'], $_GET['id'], $_POST['description'], $addImg);
 		if ( $result ) {
 		 	$result_sucsess = "Фильм был успешно обновлен";
 		} else {

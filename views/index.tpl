@@ -7,7 +7,7 @@ foreach ($films as $key => $value) {
 	<div class="card mb-20">
 		<div class="row">
 			<div class="col-2">
-				<img src="<?=HOST?>data/films/wparis.jpg" alt="<?=@$film['title'] ?>">
+				<img src="<?=HOST?>data/films/min/<?=@$films[$key]['photo'] ?>" alt="<?=@$films[$key]['title'] ?>">
 			</div>
 			<div class="col">
 				<div class="card__header">

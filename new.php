@@ -8,7 +8,7 @@ $link = db_connect();
 //вывод фильмов
 require ('models/films.php');
 $films = films_all($link);
-
+$addImg = add_img();
 
 if ( array_key_exists('newFilm', $_POST) ) {
 	//Обработка ошибок
@@ -24,7 +24,7 @@ if ( array_key_exists('newFilm', $_POST) ) {
 	}
 	//если ошибок нет сохраняем фильм в базу данных
 	if ($errors == []){
-		$result = add_film($link,$_POST['title'], $_POST['genre'], $_POST['year'], $_POST['description']);
+		$result = add_film($link, $_POST['title'], $_POST['genre'], $_POST['year'], $_POST['description'], $addImg);
 		if ( $result ) {
 		 	$result_sucsess = "Фильм был успешно добавлен";
 		} else {
